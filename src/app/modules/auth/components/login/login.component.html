@@ -1,0 +1,37 @@
+<div class="login flex flex-row w-full h-full">
+  <div class="h-full w-1/2 hidden md:flex md:visible">
+    <img
+      src="https://abs.twimg.com/sticky/illustrations/lohp_en_1302x955.png" />
+  </div>
+  <div
+    class="h-full w-full md:w-1/2 flex flex-col justify-center form-container">
+    <h1 class="text-5xl font-extrabold mb-9">Login to TwittX</h1>
+    <form class="flex flex-col" [formGroup]="loginForm" (submit)="login()">
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="email" placeholder="Email" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="password" placeholder="Password" />
+      </mat-form-field>
+      <button
+        [disabled]="loginForm.invalid"
+        mat-flat-button
+        color="primary"
+        type="submit">
+        <span *ngIf="!awaitingLogin">Login</span>
+        <mat-spinner
+          color="accent"
+          [diameter]="28"
+          *ngIf="awaitingLogin"></mat-spinner>
+      </button>
+      <span class="mt-4 text-end"
+        >No account?
+        <a
+          class="cursor-pointer text-blue-900 font-bold"
+          (click)="navigateToRegister()"
+          >Register</a
+        ></span
+      >
+    </form>
+  </div>
+</div>
