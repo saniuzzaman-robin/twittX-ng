@@ -19,13 +19,14 @@
         </mat-form-field>
         <button
           [disabled]="registerForm.invalid"
+          class="h-10"
           mat-flat-button
           color="primary"
           type="submit">
           <span *ngIf="!awaitingRegister">Register</span>
           <mat-spinner
             color="accent"
-            [diameter]="28"
+            [diameter]="24"
             *ngIf="awaitingRegister"></mat-spinner>
         </button>
         <span class="mt-4 text-end"

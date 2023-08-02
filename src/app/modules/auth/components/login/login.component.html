@@ -16,13 +16,14 @@
       </mat-form-field>
       <button
         [disabled]="loginForm.invalid"
+        class="h-10"
         mat-flat-button
         color="primary"
         type="submit">
         <span *ngIf="!awaitingLogin">Login</span>
         <mat-spinner
           color="accent"
-          [diameter]="28"
+          [diameter]="24"
           *ngIf="awaitingLogin"></mat-spinner>
       </button>
       <span class="mt-4 text-end"
