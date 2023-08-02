@@ -14,7 +14,7 @@ export class AuthService {
     private _cookieService: CookieService
   ) {}
   login(data: Login): Promise<LoginResponse | any> {
-    let httpHeader = new HttpHeaders({
+    const httpHeader = new HttpHeaders({
       name: 'Content-Type',
       value: 'application/json',
       id: 'pair_440bc96814454acd8c25ac71f2d43075',
@@ -32,6 +32,30 @@ export class AuthService {
               );
               console.log('cookie set');
             }
+          })
+        )
+        .subscribe(
+          (res: any) => {
+            resolve(true);
+          },
+          error => {
+            reject(error?.error);
+          }
+        );
+    });
+  }
+  register(data: Login): Promise<LoginResponse | any> {
+    const httpHeader = new HttpHeaders({
+      name: 'Content-Type',
+      value: 'application/json',
+      id: 'pair_440bc96814454acd8c25ac71f2d43075',
+    });
+    return new Promise((resolve, reject) => {
+      this._httpClient
+        .post(environment?.registerUrl, data, { headers: httpHeader })
+        .pipe(
+          tap((res: any) => {
+            console.log('register user');
           })
         )
         .subscribe(
