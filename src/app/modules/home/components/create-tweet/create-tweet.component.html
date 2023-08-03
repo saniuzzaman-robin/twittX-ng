@@ -1,0 +1,20 @@
+<div class="p-6 bg-white rounded-lg flex flex-col">
+  <div class="flex flex-row gap-2">
+    <img
+      alt="create post logo"
+      src="../../../../../assets/icons/notepad_edit_icon.svg" />
+    <span class="text-gray-400">Create New Post</span>
+  </div>
+  <mat-form-field
+    appearance="outline"
+    class="custom-textarea w-full bg-gray-50 mt-3">
+    <textarea
+      class="h-24"
+      matInput
+      [(ngModel)]="textInput"
+      placeholder="What's on your mind?"></textarea>
+  </mat-form-field>
+  <button mat-flat-button class="self-end mt-4 post-btn" color="primary">
+    Post
+  </button>
+</div>
