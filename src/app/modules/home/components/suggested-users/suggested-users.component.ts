@@ -4,7 +4,9 @@ import {
   Component,
   Inject,
   Input,
+  OnChanges,
   OnInit,
+  SimpleChanges,
 } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { User } from 'src/app/shared/models/shared.models';
@@ -14,7 +16,9 @@ import { User } from 'src/app/shared/models/shared.models';
   templateUrl: './suggested-users.component.html',
   styleUrls: ['./suggested-users.component.scss'],
 })
-export class SuggestedUsersComponent implements OnInit, AfterContentInit {
+export class SuggestedUsersComponent
+  implements OnInit, AfterContentInit, OnChanges
+{
   @Input() myFollowings: User[] = [];
   users: User[] = [];
   recommendedUsers: User[] = [];
@@ -37,7 +41,12 @@ export class SuggestedUsersComponent implements OnInit, AfterContentInit {
         break;
       }
     }
-    this.fetchedRecommendedUsers = true;
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes['myFollowings']?.firstChange) {
+      this.initRecommendedUsers();
+      this.fetchedRecommendedUsers = true;
+    }
   }
   followUser(user: User): void {
     this._homeService.followUser(user.id).subscribe(res => {
@@ -45,7 +54,6 @@ export class SuggestedUsersComponent implements OnInit, AfterContentInit {
         this.myFollowings.push(user);
         this.initRecommendedUsers();
       }
-      debugger;
     });
   }
 }

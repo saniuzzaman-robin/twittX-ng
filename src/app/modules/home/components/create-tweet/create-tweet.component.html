@@ -5,16 +5,16 @@
       src="../../../../../assets/icons/notepad_edit_icon.svg" />
     <span class="text-gray-400">Create New Post</span>
   </div>
-  <mat-form-field
-    appearance="outline"
-    class="custom-textarea w-full bg-gray-50 mt-3">
+  <mat-form-field appearance="outline" class="custom-textarea w-ful mt-3">
     <textarea
-      class="h-24"
+      class="h-full"
       matInput
       [(ngModel)]="textInput"
+      [maxlength]="160"
       placeholder="What's on your mind?"></textarea>
+    <mat-hint>{{ textInput.length }} / 160</mat-hint>
   </mat-form-field>
-  <button mat-flat-button class="self-end mt-4 post-btn" color="primary">
+  <button mat-flat-button class="self-end mt-2 post-btn" color="primary" (click)="postTweet()">
     Post
   </button>
 </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { TwittxCommandService } from 'src/app/shared/services/twittx-command.service';
 import { TwittxQueryService } from 'src/app/shared/services/twittx-query.service';
 import { environment } from 'src/environments/environment';
@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class HomeService {
+  newTweetPosted: BehaviorSubject<any> = new BehaviorSubject('');
   constructor(
     private _commandService: TwittxCommandService,
     private _queryService: TwittxQueryService
@@ -31,6 +32,12 @@ export class HomeService {
     return this._commandService.executeAsync(
       environment.commandQueryUrls.followUser,
       { user_id: id }
+    );
+  }
+  makeTweet(text: string): Observable<any> {
+    return this._commandService.executeAsync(
+      environment.commandQueryUrls.makeTweet,
+      { content: text }
     );
   }
 }
