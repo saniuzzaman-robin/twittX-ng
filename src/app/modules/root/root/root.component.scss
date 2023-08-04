@@ -1,3 +1,7 @@
 :host ::ng-deep app-home-page {
   flex: 1;
 }
+.network-progress-bar {
+  position: absolute !important;
+  top: 88px !important;
+}

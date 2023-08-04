@@ -4,6 +4,7 @@ import { RootComponent } from './root/root.component';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { Route, RouterModule } from '@angular/router';
 import { MenuComponent } from '../../shared/components/menu/menu.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const routes: Route[] = [
   {
@@ -35,6 +36,7 @@ const routes: Route[] = [
     HeaderComponent,
     RouterModule.forChild(routes),
     MenuComponent,
+    MatProgressBarModule,
   ],
 })
 export class RootModule {}
