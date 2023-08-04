@@ -5,6 +5,7 @@ import { HeaderComponent } from '../../shared/components/header/header.component
 import { Route, RouterModule } from '@angular/router';
 import { MenuComponent } from '../../shared/components/menu/menu.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ComingSoonComponent } from 'src/app/shared/components/coming-soon/coming-soon.component';
 
 const routes: Route[] = [
   {
@@ -22,9 +23,25 @@ const routes: Route[] = [
           import('../home/home.module').then(m => m.HomeModule),
       },
       {
+        path: 'profile',
+        loadChildren: () =>
+          import('../profile/profile.module').then(m => m.ProfileModule),
+      },
+      {
         path: 'profile/:id',
         loadChildren: () =>
           import('../profile/profile.module').then(m => m.ProfileModule),
+      },
+      {
+        path: 'explore-users',
+        loadChildren: () =>
+          import('../explore-users/explore-users.module').then(
+            m => m.ExploreUsersModule
+          ),
+      },
+      {
+        path: 'coming-soon',
+        component: ComingSoonComponent,
       },
     ],
   },
