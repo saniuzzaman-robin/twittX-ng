@@ -35,7 +35,7 @@ export class AuthService {
               this._cookieService.setCookie(
                 window.location.hostname,
                 res?.token,
-                1
+                60
               );
               console.log('cookie set');
             }

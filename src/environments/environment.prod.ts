@@ -1,4 +1,4 @@
-import { Environment } from 'src/app/shared/models/EnvironmentType';
+import { Environment } from 'src/app/shared/models/shared.models';
 
 export const environment: Environment = {
   production: true,
