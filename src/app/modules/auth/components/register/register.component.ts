@@ -32,7 +32,9 @@ export class RegisterComponent {
       .register(this.registerForm.getRawValue())
       .then((res: boolean) => {
         if (res) {
-          this.showSnackbarMessage('Registration successful, please redirect to login page to login')
+          this.showSnackbarMessage(
+            'Registration successful, please redirect to login page to login'
+          );
           //this._router.navigate(['home']);
         }
         this.awaitingRegister = false;

@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       .then((res: boolean) => {
         if (res) {
           console.log('logged in');
-          //this._router.navigate(['home']);
+          this._router.navigate(['home']);
         }
         this.awaitingLogin = false;
       })

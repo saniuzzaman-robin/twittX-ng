@@ -1,7 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { Login, LoginResponse } from '../models/auth.model';
+import {
+  Login,
+  LoginResponse,
+  Register,
+  RegisterResponse,
+} from '../models/auth.model';
 import { tap } from 'rxjs';
 import { CookieService } from './cookie.service';
 
@@ -21,14 +26,16 @@ export class AuthService {
     });
     return new Promise((resolve, reject) => {
       this._httpClient
-        .post(environment?.loginUrl, data, { headers: httpHeader })
+        .post(environment?.commandQueryUrls.login, data, {
+          headers: httpHeader,
+        })
         .pipe(
           tap((res: any) => {
             if (res?.token) {
               this._cookieService.setCookie(
                 window.location.hostname,
                 res?.token,
-                10
+                1
               );
               console.log('cookie set');
             }
@@ -44,7 +51,7 @@ export class AuthService {
         );
     });
   }
-  register(data: Login): Promise<LoginResponse | any> {
+  register(data: Register): Promise<RegisterResponse | any> {
     const httpHeader = new HttpHeaders({
       name: 'Content-Type',
       value: 'application/json',
@@ -52,7 +59,9 @@ export class AuthService {
     });
     return new Promise((resolve, reject) => {
       this._httpClient
-        .post(environment?.registerUrl, data, { headers: httpHeader })
+        .post(environment?.commandQueryUrls.register, data, {
+          headers: httpHeader,
+        })
         .pipe(
           tap((res: any) => {
             console.log('register user');
