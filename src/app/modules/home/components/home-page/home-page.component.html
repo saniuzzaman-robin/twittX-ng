@@ -1,11 +1,9 @@
 <div
-  class="home-container flex max-h-full flex-row w-full h-full justify-between gap-6 pt-6 relative">
-  <div class="hidden sm:flex sm:h-full sm:flex-col gap-6 sm:sticky sm:top-0">
-    <app-menu class="flex-none"></app-menu>
-  </div>
-  <div class="flex flex-col w-full sm:w-2/3 md:w:1/2">
+  class="home-container flex max-h-full flex-row w-full h-full pt-8 justify-between gap-6">
+  <div class="flex flex-col">
     <app-create-tweet></app-create-tweet>
     <app-tweet-timeline></app-tweet-timeline>
   </div>
-  <app-suggested-users class="hidden xl:flex xl:sticky xl:top-0 xl:mb-8"></app-suggested-users>
+  <app-suggested-users
+    class="hidden xl:flex xl:sticky xl:top-0 xl:mb-8"></app-suggested-users>
 </div>

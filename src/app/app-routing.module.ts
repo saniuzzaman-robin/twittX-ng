@@ -7,14 +7,8 @@ const routes: Routes = [
   {
     path: '',
     canActivate: [authGuard],
-    component: HeaderComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: () =>
-          import('./modules/home/home.module').then(m => m.HomeModule),
-      },
-    ],
+    loadChildren: () =>
+      import('./modules/root/root.module').then(m => m.RootModule),
   },
   {
     path: 'auth',
