@@ -7,6 +7,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { CreateTweetComponent } from './components/create-tweet/create-tweet.component';
 import { SuggestedUsersComponent } from './components/suggested-users/suggested-users.component';
 import { TweetTimelineComponent } from './components/tweet-timeline/tweet-timeline.component';
+import { TweetCardComponent } from "../../shared/components/tweet-card/tweet-card.component";
 
 const routes: Route[] = [
   {
@@ -21,7 +22,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  declarations: [HomePageComponent, MenuComponent, CreateTweetComponent, SuggestedUsersComponent, TweetTimelineComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), MaterialModule],
+    declarations: [HomePageComponent, MenuComponent, CreateTweetComponent, SuggestedUsersComponent, TweetTimelineComponent],
+    imports: [CommonModule, RouterModule.forChild(routes), MaterialModule, TweetCardComponent]
 })
 export class HomeModule {}
