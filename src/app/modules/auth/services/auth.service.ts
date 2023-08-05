@@ -11,18 +11,11 @@ import { Subject, tap, BehaviorSubject } from 'rxjs';
 import { CookieService } from './cookie.service';
 import jwt_decode from 'jwt-decode';
 import { Router } from '@angular/router';
-export type LoggedInUser = {
-  username: string;
-  id: number;
-};
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  loggedInUser: BehaviorSubject<LoggedInUser> = new BehaviorSubject({
-    username: '',
-    id: 1,
-  });
   constructor(
     private _httpClient: HttpClient,
     private _cookieService: CookieService,
@@ -43,10 +36,11 @@ export class AuthService {
           tap((res: any) => {
             if (res?.token) {
               const decodedToken: any = jwt_decode(res?.token);
-              this.loggedInUser.next({
-                username: data.email.split('@')[0],
-                id: decodedToken?.id,
-              });
+              this._cookieService.setCookie(
+                'username',
+                data.email.split('@')[0],
+                decodedToken?.exp
+              );
               this._cookieService.setCookie(
                 window.location.hostname,
                 res?.token,

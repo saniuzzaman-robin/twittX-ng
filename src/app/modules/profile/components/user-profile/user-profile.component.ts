@@ -5,6 +5,7 @@ import { Timeline, User } from 'src/app/shared/models/shared.models';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/shared/services/user.service';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
+import { CookieService } from 'src/app/modules/auth/services/cookie.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -24,12 +25,12 @@ export class UserProfileComponent implements OnInit {
     private _userProfileService: UserProfileService,
     private _userService: UserService,
     private _snackbar: MatSnackBar,
-    private _authService: AuthService
+    private _cookieService: CookieService
   ) {}
   ngOnInit(): void {
     this._route.queryParamMap.subscribe((res: any) => {
       this.userName =
-        res?.params?.username ?? this._authService.loggedInUser.value.username;
+        res?.params?.username ?? this._cookieService.getCookie('username');
     });
     this._route.paramMap.subscribe(params => {
       this.userId = params.get('id') || '';
