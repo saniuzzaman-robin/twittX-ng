@@ -4,6 +4,7 @@ export type User = {
   id: number;
   join_date: string;
   username: string;
+  following?: boolean;
 };
 
 export type Timeline = {

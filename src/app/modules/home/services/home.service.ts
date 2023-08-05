@@ -18,22 +18,6 @@ export class HomeService {
       environment.commandQueryUrls.getMyTimeline
     );
   }
-  fetchUsers(): Observable<any> {
-    return this._queryService.executeAsync(
-      environment.commandQueryUrls.getAllUsers
-    );
-  }
-  fetchFollowings(): Observable<any> {
-    return this._queryService.executeAsync(
-      environment.commandQueryUrls.getMyFollowings
-    );
-  }
-  followUser(id: number): Observable<any> {
-    return this._commandService.executeAsync(
-      environment.commandQueryUrls.followUser,
-      { user_id: id }
-    );
-  }
   makeTweet(text: string): Observable<any> {
     return this._commandService.executeAsync(
       environment.commandQueryUrls.makeTweet,

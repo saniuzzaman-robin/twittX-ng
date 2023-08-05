@@ -7,8 +7,10 @@
           alt="user profile icon"
           src="../../../../../assets/icons/user_profile_icon.svg" />
         <div class="flex flex-col ml-4">
-          <h1 class="text-xl font-semibold">Safwanul Bari</h1>
-          <h3 class="text-xs text-gray-400">@swafss</h3>
+          <h1 class="text-xl font-semibold">{{ userName }}</h1>
+          <h3 class="text-xs text-gray-400">
+            @{{ userName.replace(' ', '').toLowerCase() }}
+          </h3>
         </div>
       </div>
       <button *ngIf="userId" class="follow-btn" mat-flat-button>Follow</button>

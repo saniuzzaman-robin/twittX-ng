@@ -10,4 +10,7 @@ export class TwittxQueryService {
   executeAsync(url: string, headers?: any): Observable<any> {
     return this._httpClient.get(url, { headers: headers });
   }
+  postAsync(url: string, body: any): Observable<any> {
+    return this._httpClient.post(url, body);
+  }
 }

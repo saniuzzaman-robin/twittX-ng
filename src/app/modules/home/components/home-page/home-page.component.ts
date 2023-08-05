@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../../services/home.service';
 import { User } from 'src/app/shared/models/shared.models';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,9 +9,9 @@ import { User } from 'src/app/shared/models/shared.models';
 })
 export class HomePageComponent implements OnInit {
   myFollowings: User[] = [];
-  constructor(private _homeService: HomeService) {}
+  constructor(private _userService: UserService) {}
   ngOnInit(): void {
-    this._homeService.fetchFollowings().subscribe(res => {
+    this._userService.getMyFollowings().subscribe(res => {
       this.myFollowings = res?.followings;
       console.log(this.myFollowings);
     });

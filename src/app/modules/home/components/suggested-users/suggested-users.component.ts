@@ -8,9 +8,9 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { HomeService } from '../../services/home.service';
 import { User } from 'src/app/shared/models/shared.models';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-suggested-users',
@@ -25,12 +25,12 @@ export class SuggestedUsersComponent
   recommendedUsers: User[] = [];
   fetchedRecommendedUsers: boolean = false;
   constructor(
-    private _homeService: HomeService,
+    private _userService: UserService,
     private _snackbar: MatSnackBar
   ) {}
   ngOnInit(): void {}
   ngAfterContentInit(): void {
-    this._homeService.fetchUsers().subscribe(res => {
+    this._userService.getUsers().subscribe(res => {
       this.users = res?.users;
       this.initRecommendedUsers();
     });
@@ -53,7 +53,7 @@ export class SuggestedUsersComponent
     }
   }
   followUser(user: User): void {
-    this._homeService.followUser(user.id).subscribe(res => {
+    this._userService.followUser(user.id.toString()).subscribe(res => {
       this.showSnackbarMessage('Followed user successfully');
       if (res?.resp) {
         this.myFollowings.push(user);

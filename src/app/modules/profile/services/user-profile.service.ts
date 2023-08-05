@@ -23,41 +23,5 @@ export class UserProfileService {
       queryUrl = environment.commandQueryUrls.getMyTweets;
     }
     return this._queryService.executeAsync(queryUrl);
-  }
-  getUserFollowings(id?: string): Observable<any> {
-    let queryUrl = '';
-    if (id) {
-      queryUrl = environment.commandQueryUrls.getFollwingsByUserId.replace(
-        'user_id',
-        id
-      );
-    } else {
-      queryUrl = environment.commandQueryUrls.getMyFollowings;
-    }
-    return this._queryService.executeAsync(queryUrl);
-  }
-  getUserFollowers(id?: string): Observable<any> {
-    let queryUrl = '';
-    if (id) {
-      queryUrl = environment.commandQueryUrls.getFollowersByUserId.replace(
-        'user_id',
-        id
-      );
-    } else {
-      queryUrl = environment.commandQueryUrls.getMyFollowers;
-    }
-    return this._queryService.executeAsync(queryUrl);
-  }
-  followUser(id: string): Observable<any> {
-    return this._commandService.executeAsync(
-      environment.commandQueryUrls.followUser,
-      { user_id: id }
-    );
-  }
-  unfollowUser(id: string): Observable<any> {
-    return this._commandService.executeAsync(
-      environment.commandQueryUrls.unfollowUser,
-      { user_id: id }
-    );
-  }
+  }  
 }

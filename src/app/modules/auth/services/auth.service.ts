@@ -7,15 +7,21 @@ import {
   Register,
   RegisterResponse,
 } from '../models/auth.model';
-import { Subject, tap } from 'rxjs';
+import { Subject, tap, BehaviorSubject } from 'rxjs';
 import { CookieService } from './cookie.service';
 import jwt_decode from 'jwt-decode';
-
+export type LoggedInUser = {
+  username: string;
+  id: number;
+};
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  userId: Subject<string> = new Subject();
+  loggedInUser: BehaviorSubject<LoggedInUser> = new BehaviorSubject({
+    username: '',
+    id: 1,
+  });
   constructor(
     private _httpClient: HttpClient,
     private _cookieService: CookieService
@@ -35,7 +41,11 @@ export class AuthService {
           tap((res: any) => {
             if (res?.token) {
               const decodedToken: any = jwt_decode(res?.token);
-              this.userId.next(decodedToken?.id);
+              this.loggedInUser.next({
+                username: data.email.split('@')[0],
+                id: decodedToken?.id,
+              });
+              debugger;
               this._cookieService.setCookie(
                 window.location.hostname,
                 res?.token,
