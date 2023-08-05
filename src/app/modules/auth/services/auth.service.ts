@@ -10,6 +10,7 @@ import {
 import { Subject, tap, BehaviorSubject } from 'rxjs';
 import { CookieService } from './cookie.service';
 import jwt_decode from 'jwt-decode';
+import { Router } from '@angular/router';
 export type LoggedInUser = {
   username: string;
   id: number;
@@ -24,7 +25,8 @@ export class AuthService {
   });
   constructor(
     private _httpClient: HttpClient,
-    private _cookieService: CookieService
+    private _cookieService: CookieService,
+    private _router: Router
   ) {}
   login(data: Login): Promise<LoginResponse | any> {
     const httpHeader = new HttpHeaders({
@@ -74,10 +76,7 @@ export class AuthService {
         .post(environment?.commandQueryUrls.register, data, {
           headers: httpHeader,
         })
-        .pipe(
-          tap((res: any) => {
-          })
-        )
+        .pipe(tap((res: any) => {}))
         .subscribe(
           (res: any) => {
             resolve(true);
@@ -87,5 +86,9 @@ export class AuthService {
           }
         );
     });
+  }
+  logout(): void {
+    this._cookieService.deleteCookie(window.location.hostname);
+    this._router.navigate(['auth', 'login']);
   }
 }
