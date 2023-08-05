@@ -14,7 +14,12 @@
       placeholder="What's on your mind?"></textarea>
     <mat-hint>{{ textInput.length }} / 160</mat-hint>
   </mat-form-field>
-  <button mat-flat-button class="self-end mt-2 post-btn" color="primary" (click)="postTweet()">
+  <button
+    [disabled]="textInput.length < 1"
+    mat-flat-button
+    class="self-end mt-2 post-btn"
+    color="primary"
+    (click)="postTweet()">
     Post
   </button>
 </div>
