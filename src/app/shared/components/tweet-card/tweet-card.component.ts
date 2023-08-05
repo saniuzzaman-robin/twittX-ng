@@ -12,4 +12,7 @@ import { Timeline } from '../../models/shared.models';
 })
 export class TweetCardComponent {
   @Input() timeline: Timeline | undefined;
+  getRandomNumber(): number {
+    return Math.floor(Math.random() * 100) + 1;
+  }
 }
