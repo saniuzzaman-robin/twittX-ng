@@ -1,0 +1,12 @@
+.follow-btn {
+  border-radius: 20px !important;
+  border: 1px solid #3e97ff;
+  color: #3e97ff !important;
+  height: 32px;
+}
+:host ::ng-deep .mat-mdc-tab-labels .mdc-tab.mat-mdc-tab {
+  flex-grow: initial !important;
+  margin: 0px 16px;
+  border-radius: 8px;
+  height: 32px;
+}
