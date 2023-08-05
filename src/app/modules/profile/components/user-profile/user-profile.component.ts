@@ -27,9 +27,12 @@ export class UserProfileComponent implements OnInit {
     private _authService: AuthService
   ) {}
   ngOnInit(): void {
+    this._route.queryParamMap.subscribe((res: any) => {
+      this.userName =
+        res?.params?.username ?? this._authService.loggedInUser.value.username;
+    });
     this._route.paramMap.subscribe(params => {
       this.userId = params.get('id') || '';
-      this.userName = '';
       this.fetchUserTweets(this.userId);
       this.fetchUserFollowers(this.userId);
       this.fetchUserFollowings(this.userId);
@@ -39,17 +42,9 @@ export class UserProfileComponent implements OnInit {
     this._userProfileService.getUserTweets(id).subscribe(res => {
       if (this.userId) {
         this.tweets = [...res?.tweets];
-        this.userName =
-          res?.tweets[0]?.user?.username ??
-          this._authService.loggedInUser.value.username;
       } else {
         this.tweets = [...res?.my_tweets];
-        this.userName =
-          res?.my_tweets[0]?.user?.username ??
-          this._authService.loggedInUser.value.username;
       }
-      this.userName =
-        this.userName ?? this._authService.loggedInUser.value.username;
       this.fetchedTweets = true;
     });
   }

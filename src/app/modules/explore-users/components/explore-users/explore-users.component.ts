@@ -74,7 +74,9 @@ export class ExploreUsersComponent implements OnInit {
   showSnackbarMessage(data: string): void {
     this._snackbar.open(data, '', { duration: 2000 });
   }
-  navigateToProfile(id: number) {
-    this._router.navigate(['profile/', id]);
+  navigateToProfile(user: User) {
+    this._router.navigate(['profile/', user.id], {
+      queryParams: { username: user.username },
+    });
   }
 }
