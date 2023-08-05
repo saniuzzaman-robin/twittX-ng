@@ -27,12 +27,10 @@ export class LoginComponent implements OnInit {
   }
   async login() {
     this.awaitingLogin = true;
-    console.log(this.loginForm.getRawValue());
     await this._authService
       .login(this.loginForm.getRawValue())
       .then((res: boolean) => {
         if (res) {
-          console.log('logged in');
           this._router.navigate(['home']);
         }
         this.awaitingLogin = false;

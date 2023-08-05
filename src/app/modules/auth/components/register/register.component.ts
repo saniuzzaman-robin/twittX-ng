@@ -27,7 +27,6 @@ export class RegisterComponent {
   }
   async register() {
     this.awaitingRegister = true;
-    console.log(this.registerForm.getRawValue());
     await this._authService
       .register(this.registerForm.getRawValue())
       .then((res: boolean) => {

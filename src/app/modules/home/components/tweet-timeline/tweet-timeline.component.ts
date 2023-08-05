@@ -30,7 +30,6 @@ export class TweetTimelineComponent implements OnInit, OnDestroy {
     this._homeService.fetchTimeline().subscribe(res => {
       this.fetchedTimeline = true;
       this.timelineItems = [...res?.timeline];
-      console.log(res);
     });
   }
 }

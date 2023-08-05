@@ -6,6 +6,7 @@ import { Route, RouterModule } from '@angular/router';
 import { MenuComponent } from '../../shared/components/menu/menu.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ComingSoonComponent } from 'src/app/shared/components/coming-soon/coming-soon.component';
+import { BottomMenuComponent } from "../../shared/components/bottom-menu/bottom-menu.component";
 
 const routes: Route[] = [
   {
@@ -47,13 +48,14 @@ const routes: Route[] = [
   },
 ];
 @NgModule({
-  declarations: [RootComponent],
-  imports: [
-    CommonModule,
-    HeaderComponent,
-    RouterModule.forChild(routes),
-    MenuComponent,
-    MatProgressBarModule,
-  ],
+    declarations: [RootComponent],
+    imports: [
+        CommonModule,
+        HeaderComponent,
+        RouterModule.forChild(routes),
+        MenuComponent,
+        MatProgressBarModule,
+        BottomMenuComponent
+    ]
 })
 export class RootModule {}

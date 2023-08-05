@@ -45,13 +45,11 @@ export class AuthService {
                 username: data.email.split('@')[0],
                 id: decodedToken?.id,
               });
-              debugger;
               this._cookieService.setCookie(
                 window.location.hostname,
                 res?.token,
                 decodedToken?.exp
               );
-              console.log('cookie set');
             }
           })
         )
@@ -78,7 +76,6 @@ export class AuthService {
         })
         .pipe(
           tap((res: any) => {
-            console.log('register user');
           })
         )
         .subscribe(

@@ -32,7 +32,7 @@ export class ExploreUsersComponent implements OnInit {
     this.exploreUsersForm.controls['textSearch'].valueChanges
       .pipe(debounceTime(500))
       .subscribe((res: string) => {
-        if (res) {
+        if (res.length > 2) {
           this.fetchUsers(res);
         } else {
           this.users = cloneDeep(this.allUsers);

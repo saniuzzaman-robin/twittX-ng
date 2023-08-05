@@ -1,4 +1,4 @@
-<div class="mt-6 flex flex-1 max-h-full flex-col">
+<div class="mt-6 flex flex-1 max-h-full flex-col mb-12">
   <ng-container *ngIf="!fetchedTimeline; then twittsList"></ng-container>
   <app-tweet-card
     *ngFor="let item of timelineItems"

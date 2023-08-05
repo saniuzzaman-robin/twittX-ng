@@ -13,7 +13,6 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this._userService.getMyFollowings().subscribe(res => {
       this.myFollowings = res?.followings;
-      console.log(this.myFollowings);
     });
   }
 }

@@ -1,22 +1,31 @@
 <div
   class="flex flex-col h-full pt-8 px-4 md:px-20 overflow-y-auto"
   [formGroup]="exploreUsersForm">
-  <mat-form-field class="search-field w-2/3" appearance="outline">
+  <mat-form-field class="search-field w-full sm:w-2/3" appearance="outline">
+    <img
+      matPrefix
+      class="mr-2 ml-6"
+      alt="search icon"
+      src="../../../../assets/icons/magnifier_icon.svg" />
     <input
       class="ml-2"
       matInput
+      minlength="3"
+      #searchInput
       placeholder="Search user"
       formControlName="textSearch" />
     <img
+      *ngIf="searchInput.value"
       matSuffix
-      class="mr-6 ml-2"
+      (click)="exploreUsersForm.controls['textSearch'].setValue('')"
+      class="ml-2 mr-6 h-3"
       alt="search icon"
-      src="../../../../assets/icons/magnifier_icon.svg" />
+      src="../../../../assets/icons/cross_icon.svg" />
   </mat-form-field>
   <div class="w-full" *ngIf="!fetchedUsers; then usersTemplate"></div>
   <div
     *ngIf="fetchedUsers"
-    class="flex flex-row w-full justify-between flex-wrap mt-6">
+    class="flex flex-row w-full justify-between flex-wrap mt-6 pb-12">
     <span *ngIf="!users?.length">No users found</span>
     <ng-container *ngFor="let user of users">
       <div
