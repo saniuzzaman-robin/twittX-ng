@@ -1,0 +1,27 @@
+<div
+  class="w-full bg-white py-6 px-[10%] rounded-lg text-center flex flex-col gap-4">
+  <span *ngIf="!users?.length">No users found</span>
+  <ng-container *ngFor="let user of users">
+    <div class="flex flex-row gap-2 pl-3 justify-between items-center">
+      <div class="flex flex-row gap-2">
+        <div class="rounded-full overflow-hidden h-10">
+          <img alt="home icon" src="../../../../../assets/icons/avatar_1.svg" />
+        </div>
+        <div class="flex flex-col">
+          <h5 class="text-sm">{{ user.username }}</h5>
+          <h6 class="text-xs">
+            @{{ user?.username?.replace(' ', '')?.toLowerCase() }}
+          </h6>
+        </div>
+      </div>
+      <button
+        class="follow-btn"
+        (click)="unfollow(user.id.toString())"
+        mat-flat-button
+        *ngIf="followingList && myProfile">
+        Unfollow
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+  </ng-container>
+</div>

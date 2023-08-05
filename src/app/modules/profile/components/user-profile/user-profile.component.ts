@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserProfileService } from '../../services/user-profile.service';
 import { Timeline, User } from 'src/app/shared/models/shared.models';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,13 +10,15 @@ import { Timeline, User } from 'src/app/shared/models/shared.models';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  userId: string | null = null;
+  userId: string = '';
   tweets: Timeline[] = [];
   followings: User[] = [];
   followers: User[] = [];
+  fetchedTweets: boolean = false;
   constructor(
     private _route: ActivatedRoute,
-    private _userProfileService: UserProfileService
+    private _userProfileService: UserProfileService,
+    private _snackbar: MatSnackBar
   ) {}
   ngOnInit(): void {
     this._route.paramMap.subscribe(params => {
@@ -32,6 +35,7 @@ export class UserProfileComponent implements OnInit {
       } else {
         this.tweets = [...res?.my_tweets];
       }
+      this.fetchedTweets = true;
     });
   }
   fetchUserFollowings(id?: string) {
@@ -43,5 +47,16 @@ export class UserProfileComponent implements OnInit {
     this._userProfileService.getUserFollowers(id).subscribe(res => {
       this.followers = [...res?.followers];
     });
+  }
+  unfollowUser(id: string): void {
+    this._userProfileService.unfollowUser(id).subscribe(res => {
+      this.followings = this.followings.filter(
+        item => item.id.toString() !== id
+      );
+      this.showSnackbarMessage('Unfollowed user');
+    });
+  }
+  showSnackbarMessage(data: string): void {
+    this._snackbar.open(data, '', { duration: 2000 });
   }
 }

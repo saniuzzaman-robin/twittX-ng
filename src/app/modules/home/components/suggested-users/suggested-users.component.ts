@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { User } from 'src/app/shared/models/shared.models';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-suggested-users',
@@ -23,7 +24,10 @@ export class SuggestedUsersComponent
   users: User[] = [];
   recommendedUsers: User[] = [];
   fetchedRecommendedUsers: boolean = false;
-  constructor(private _homeService: HomeService) {}
+  constructor(
+    private _homeService: HomeService,
+    private _snackbar: MatSnackBar
+  ) {}
   ngOnInit(): void {}
   ngAfterContentInit(): void {
     this._homeService.fetchUsers().subscribe(res => {
@@ -50,10 +54,14 @@ export class SuggestedUsersComponent
   }
   followUser(user: User): void {
     this._homeService.followUser(user.id).subscribe(res => {
+      this.showSnackbarMessage('Followed user successfully');
       if (res?.resp) {
         this.myFollowings.push(user);
         this.initRecommendedUsers();
       }
     });
+  }
+  showSnackbarMessage(data: string): void {
+    this._snackbar.open(data, '', { duration: 2000 });
   }
 }
