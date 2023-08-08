@@ -12,10 +12,12 @@ export class ExploreUsersService {
     private _commandService: TwittxCommandService,
     private _queryService: TwittxQueryService
   ) {}
-  searchUser(key: string): Observable<any> {
+  searchUser(key: string, queryParams?: any): Observable<any> {
     return this._queryService.postAsync(
       environment.commandQueryUrls.searchByUsername,
-      { token: key }
+      { token: key },
+      {},
+      queryParams
     );
   }
 }

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { debounceTime, forkJoin } from 'rxjs';
-import { User } from 'src/app/shared/models/shared.models';
+import { debounceTime} from 'rxjs';
+import { PageConfig, User } from 'src/app/shared/models/shared.models';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ExploreUsersService } from '../../services/explore-users.service';
-import { cloneDeep } from 'lodash';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
@@ -15,9 +14,13 @@ import { Router } from '@angular/router';
 })
 export class ExploreUsersComponent implements OnInit {
   users: User[] = [];
-  allUsers: User[] = [];
   followingList: number[] = [];
   fetchedUsers: boolean = false;
+  fetchedAllUsers: boolean = false;
+  usersPageConfig: PageConfig = {
+    page: 1,
+    size: 10,
+  };
   exploreUsersForm: FormGroup = new FormGroup({
     textSearch: new FormControl(),
   });
@@ -28,29 +31,20 @@ export class ExploreUsersComponent implements OnInit {
     private _router: Router
   ) {}
   ngOnInit(): void {
-    this.initData();
+    this.fetchUsers();
     this.exploreUsersForm.controls['textSearch'].valueChanges
       .pipe(debounceTime(500))
       .subscribe((res: string) => {
+        this.fetchedAllUsers = false;
+        this.usersPageConfig.page = 1;
+        this.fetchedUsers = false;
+        this.users = [];
         if (res.length > 2) {
-          this.fetchUsers(res);
+          this.fetchUsersBySearch(res);
         } else {
-          this.users = cloneDeep(this.allUsers);
+          this.fetchAllUsers();
         }
       });
-  }
-  initData(): void {
-    forkJoin([
-      this._userService.getUsers(),
-      this._userService.getMyFollowings(),
-    ]).subscribe(res => {
-      res[1]?.followings?.forEach((item: any) => {
-        this.followingList.push(item.id);
-      });
-      this.users = [...res[0]?.users];
-      this.allUsers = cloneDeep(this.users);
-      this.fetchedUsers = true;
-    });
   }
   follow(id: string): void {
     this._userService.followUser(id).subscribe(res => {
@@ -66,10 +60,46 @@ export class ExploreUsersComponent implements OnInit {
       this.showSnackbarMessage('Unfollowed user');
     });
   }
-  fetchUsers(key: string): void {
-    this._exploreUsersService.searchUser(key).subscribe(res => {
-      this.users = [...res?.search_results];
+  fetchUsersBySearch(key: string): void {
+    if (this.fetchedAllUsers) {
+      return;
+    }
+    this._exploreUsersService
+      .searchUser(key, this.usersPageConfig)
+      .subscribe(res => {
+        this.fetchedUsers = true;
+        this.users = [...this.users, ...res?.search_results];
+        if (res?.count < this.usersPageConfig.size) {
+          this.fetchedAllUsers = true;
+        } else {
+          this.usersPageConfig.page++;
+        }
+        debugger
+      });
+  }
+  fetchAllUsers() {
+    if (this.fetchedAllUsers) {
+      return;
+    }
+    this._userService.getUsers(this.usersPageConfig).subscribe(res => {
+      this.fetchedUsers = true;
+      this.users = [...this.users, ...res?.users];
+      if (res?.count < this.usersPageConfig.size) {
+        this.fetchedAllUsers = true;
+      } else {
+        this.usersPageConfig.page++;
+      }
+      debugger
     });
+  }
+  fetchUsers() {
+    if (this.exploreUsersForm.controls['textSearch'].value?.length > 2) {
+      this.fetchUsersBySearch(
+        this.exploreUsersForm.controls['textSearch'].value
+      );
+    } else {
+      this.fetchAllUsers();
+    }
   }
   showSnackbarMessage(data: string): void {
     this._snackbar.open(data, '', { duration: 2000 });
