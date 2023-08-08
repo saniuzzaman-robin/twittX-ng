@@ -30,15 +30,15 @@ export class UserProfileComponent implements OnInit {
   selectedTabIndex: number = 0;
   tweetsPageConfig: PageConfig = {
     page: 1,
-    size: 10,
+    size: 20,
   };
   followingsPageConfig: PageConfig = {
     page: 1,
-    size: 10,
+    size: 20,
   };
   followersPageConfig: PageConfig = {
     page: 1,
-    size: 10,
+    size: 20,
   };
   constructor(
     private _route: ActivatedRoute,

@@ -19,7 +19,7 @@ export class HomePageComponent implements OnInit {
   timelineItems: Timeline[] = [];
   pageConfig: PageConfig = {
     page: 1,
-    size: 10,
+    size: 20,
   };
   constructor(
     private _userService: UserService,

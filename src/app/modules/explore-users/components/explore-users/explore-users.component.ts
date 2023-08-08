@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { debounceTime} from 'rxjs';
+import { debounceTime } from 'rxjs';
 import { PageConfig, User } from 'src/app/shared/models/shared.models';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ExploreUsersService } from '../../services/explore-users.service';
@@ -19,7 +19,7 @@ export class ExploreUsersComponent implements OnInit {
   fetchedAllUsers: boolean = false;
   usersPageConfig: PageConfig = {
     page: 1,
-    size: 10,
+    size: 20,
   };
   exploreUsersForm: FormGroup = new FormGroup({
     textSearch: new FormControl(),
@@ -73,7 +73,7 @@ export class ExploreUsersComponent implements OnInit {
           this.fetchedAllUsers = true;
         } else {
           this.usersPageConfig.page++;
-        }        
+        }
       });
   }
   fetchAllUsers() {
