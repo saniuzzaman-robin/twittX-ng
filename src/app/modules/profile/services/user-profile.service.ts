@@ -12,7 +12,7 @@ export class UserProfileService {
     private _queryService: TwittxQueryService,
     private _commandService: TwittxCommandService
   ) {}
-  getUserTweets(id?: string): Observable<any> {
+  getUserTweets(id?: string, queryParams?: any): Observable<any> {
     let queryUrl = '';
     if (id) {
       queryUrl = environment.commandQueryUrls.getTweetsByUserId.replace(
@@ -22,6 +22,6 @@ export class UserProfileService {
     } else {
       queryUrl = environment.commandQueryUrls.getMyTweets;
     }
-    return this._queryService.executeAsync(queryUrl);
-  }  
+    return this._queryService.executeAsync(queryUrl, {}, queryParams);
+  }
 }

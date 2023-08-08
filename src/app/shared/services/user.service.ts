@@ -12,19 +12,25 @@ export class UserService {
     private _queryService: TwittxQueryService,
     private _commandService: TwittxCommandService
   ) {}
-  getUsers(): Observable<any> {
+  getUsers(queryParams?: any): Observable<any> {
     return this._queryService.executeAsync(
-      environment.commandQueryUrls.getAllUsers
+      environment.commandQueryUrls.getAllUsers,
+      {},
+      queryParams
     );
   }
-  getMyFollowings(): Observable<any> {
+  getMyFollowings(queryParams?: any): Observable<any> {
     return this._queryService.executeAsync(
-      environment.commandQueryUrls.getMyFollowings
+      environment.commandQueryUrls.getMyFollowings,
+      {},
+      queryParams
     );
   }
-  getMyFollowers(): Observable<any> {
+  getMyFollowers(queryParams?: any): Observable<any> {
     return this._queryService.executeAsync(
-      environment.commandQueryUrls.getMyFollowers
+      environment.commandQueryUrls.getMyFollowers,
+      {},
+      queryParams
     );
   }
   followUser(id: string): Observable<any> {
@@ -39,7 +45,7 @@ export class UserService {
       { user_id: id }
     );
   }
-  getUserFollowings(id?: string): Observable<any> {
+  getUserFollowings(id?: string, queryParams?: any): Observable<any> {
     let queryUrl = '';
     if (id) {
       queryUrl = environment.commandQueryUrls.getFollwingsByUserId.replace(
@@ -49,9 +55,9 @@ export class UserService {
     } else {
       queryUrl = environment.commandQueryUrls.getMyFollowings;
     }
-    return this._queryService.executeAsync(queryUrl);
+    return this._queryService.executeAsync(queryUrl, {}, queryParams);
   }
-  getUserFollowers(id?: string): Observable<any> {
+  getUserFollowers(id?: string, queryParams?: any): Observable<any> {
     let queryUrl = '';
     if (id) {
       queryUrl = environment.commandQueryUrls.getFollowersByUserId.replace(
@@ -61,6 +67,6 @@ export class UserService {
     } else {
       queryUrl = environment.commandQueryUrls.getMyFollowers;
     }
-    return this._queryService.executeAsync(queryUrl);
+    return this._queryService.executeAsync(queryUrl, {}, queryParams);
   }
 }

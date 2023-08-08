@@ -1,5 +1,8 @@
 <div
   class="flex flex-col h-full pt-8 px-4 md:px-20 overflow-y-auto"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
   [formGroup]="exploreUsersForm">
   <mat-form-field class="search-field w-full sm:w-2/3" appearance="outline">
     <img

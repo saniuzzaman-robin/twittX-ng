@@ -1,7 +1,14 @@
-<div class="flex flex-row h-full pt-8 px-4 md:px-20 overflow-y-auto">
+<div
+  class="flex flex-row h-full mt-8 px-4 lg:px-20 overflow-y-auto"
+  #profileScrollContainer
+  infiniteScroll
+  [infiniteScrollContainer]="profileScrollContainer"
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  (scrolled)="fetchData()">
   <div class="w-full rounded-lg">
     <div
-      class="bg-white px-4 pt-4 md:px-12 md:pt-8 pb-6 flex flex-row justify-between items-start rounded-lg">
+      class="bg-white px-4 pt-4 lg:px-12 md:pt-8 pb-6 flex flex-row justify-between items-start rounded-lg">
       <div class="flex flex-row">
         <img
           alt="user profile icon"
@@ -16,7 +23,7 @@
       <button *ngIf="userId" class="follow-btn" mat-flat-button>Follow</button>
     </div>
     <mat-divider></mat-divider>
-    <mat-tab-group class="pt-4 bg-white max-w-full">
+    <mat-tab-group class="pt-4 bg-white max-w-full" (selectedTabChange)="tabChanged($event)">
       <mat-tab [label]="userId ? 'Tweets' : 'My Tweets'">
         <div class="bg-gray-50 pt-6 pb-12 flex flex-col">
           <span

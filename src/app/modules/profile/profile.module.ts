@@ -5,6 +5,7 @@ import { RouterModule, Route } from '@angular/router';
 import { MaterialModule } from 'src/app/shared/modules/material/material.module';
 import { TweetCardComponent } from "../../shared/components/tweet-card/tweet-card.component";
 import { UserFollowListComponent } from './components/user-follow-list/user-follow-list.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 const routes: Route[] = [
   {
@@ -14,6 +15,6 @@ const routes: Route[] = [
 ];
 @NgModule({
     declarations: [UserProfileComponent, UserFollowListComponent],
-    imports: [CommonModule, RouterModule.forChild(routes), MaterialModule, TweetCardComponent]
+    imports: [CommonModule, RouterModule.forChild(routes), MaterialModule, TweetCardComponent, InfiniteScrollModule]
 })
 export class ProfileModule {}

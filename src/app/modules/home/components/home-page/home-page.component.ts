@@ -18,7 +18,7 @@ export class HomePageComponent implements OnInit {
   fetchedAllData: boolean = false;
   timelineItems: Timeline[] = [];
   pageConfig: PageConfig = {
-    page: 0,
+    page: 1,
     size: 10,
   };
   constructor(
@@ -38,7 +38,7 @@ export class HomePageComponent implements OnInit {
     this._homeService.fetchTimeline(this.pageConfig).subscribe(res => {
       this.fetchedTimeline = true;
       this.timelineItems = [...this.timelineItems, ...res?.timeline];
-      if (res?.count < 10) {
+      if (res?.count < this.pageConfig.size) {
         this.fetchedAllData = true;
       } else {
         this.pageConfig.page++;
