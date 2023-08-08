@@ -73,8 +73,7 @@ export class ExploreUsersComponent implements OnInit {
           this.fetchedAllUsers = true;
         } else {
           this.usersPageConfig.page++;
-        }
-        debugger
+        }        
       });
   }
   fetchAllUsers() {
@@ -89,7 +88,6 @@ export class ExploreUsersComponent implements OnInit {
       } else {
         this.usersPageConfig.page++;
       }
-      debugger
     });
   }
   fetchUsers() {
