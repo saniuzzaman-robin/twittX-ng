@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/shared/models/shared.models';
+import {
+  PageConfig,
+  Timeline,
+  User,
+} from 'src/app/shared/models/shared.models';
 import { UserService } from 'src/app/shared/services/user.service';
+import { HomeService } from '../../services/home.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,10 +14,35 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class HomePageComponent implements OnInit {
   myFollowings: User[] = [];
-  constructor(private _userService: UserService) {}
+  fetchedTimeline: boolean = false;
+  fetchedAllData: boolean = false;
+  timelineItems: Timeline[] = [];
+  pageConfig: PageConfig = {
+    page: 0,
+    size: 10,
+  };
+  constructor(
+    private _userService: UserService,
+    private _homeService: HomeService
+  ) {}
   ngOnInit(): void {
+    this.fetchTweetTimelineData();
     this._userService.getMyFollowings().subscribe(res => {
       this.myFollowings = res?.followings;
+    });
+  }
+  fetchTweetTimelineData(): void {
+    if (this.fetchedAllData) {
+      return;
+    }
+    this._homeService.fetchTimeline(this.pageConfig).subscribe(res => {
+      this.fetchedTimeline = true;
+      this.timelineItems = [...this.timelineItems, ...res?.timeline];
+      if (res?.count < 10) {
+        this.fetchedAllData = true;
+      } else {
+        this.pageConfig.page++;
+      }
     });
   }
 }

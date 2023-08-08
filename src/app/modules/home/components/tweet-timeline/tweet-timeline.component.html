@@ -1,5 +1,5 @@
 <div class="mt-6 flex flex-1 max-h-full flex-col mb-12">
-  <ng-container *ngIf="!fetchedTimeline; then twittsList"></ng-container>
+  <ng-container *ngIf="!fetchedTimelineItems; then twittsList"></ng-container>
   <app-tweet-card
     *ngFor="let item of timelineItems"
     [timeline]="item"></app-tweet-card>
@@ -11,7 +11,7 @@
 </ng-template>
 <ng-template #twittTemplate>
   <div
-    class="bg-gray-50 p-4 ring-1 ring-slate-900/5 rounded-lg ml-px mb-2 w-full h-28">
+    class="bg-gray-50 p-4 ring-1 ring-slate-900/5 rounded-lg mb-2 w-full h-28">
     <div class="flex space-x-4 animate-pulse">
       <div class="rounded-full bg-gray-300 h-10 w-10"></div>
       <div class="flex-1 space-y-6 py-1">

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { Timeline } from 'src/app/shared/models/shared.models';
 import { Subscription } from 'rxjs';
@@ -9,12 +9,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./tweet-timeline.component.scss'],
 })
 export class TweetTimelineComponent implements OnInit, OnDestroy {
-  fetchedTimeline: boolean = false;
-  timelineItems: Timeline[] = [];
+  @Input() timelineItems: Timeline[] = [];
+  @Input() fetchedTimelineItems: boolean = false;
   subscriptions: Subscription[] = [];
   constructor(private _homeService: HomeService) {}
   ngOnInit(): void {
-    this.fetchTweetTimelineData();
     this.subscriptions.push(
       this._homeService.newTweetPosted.subscribe(res => {
         if (res) {
@@ -25,11 +24,5 @@ export class TweetTimelineComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach(item => item.unsubscribe);
-  }
-  fetchTweetTimelineData(): void {
-    this._homeService.fetchTimeline().subscribe(res => {
-      this.fetchedTimeline = true;
-      this.timelineItems = [...res?.timeline];
-    });
   }
 }

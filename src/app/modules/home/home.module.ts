@@ -7,7 +7,7 @@ import { CreateTweetComponent } from './components/create-tweet/create-tweet.com
 import { SuggestedUsersComponent } from './components/suggested-users/suggested-users.component';
 import { TweetTimelineComponent } from './components/tweet-timeline/tweet-timeline.component';
 import { TweetCardComponent } from '../../shared/components/tweet-card/tweet-card.component';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 const routes: Route[] = [
   {
     path: '',
@@ -27,6 +27,7 @@ const routes: Route[] = [
     RouterModule.forChild(routes),
     MaterialModule,
     TweetCardComponent,
+    InfiniteScrollModule,
   ],
 })
 export class HomeModule {}

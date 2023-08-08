@@ -1,8 +1,17 @@
 <div
   class="home-container flex flex-row h-full pt-8 justify-between space-x-8 md:ml-8">
-  <div class="flex flex-1 flex-col">
+  <div
+    #scrollContainer
+    class="flex flex-col overflow-y-scroll w-full"
+    infiniteScroll
+    [infiniteScrollContainer]="scrollContainer"
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="fetchTweetTimelineData()">
     <app-create-tweet></app-create-tweet>
-    <app-tweet-timeline></app-tweet-timeline>
+    <app-tweet-timeline
+      [fetchedTimelineItems]="fetchedTimeline"
+      [timelineItems]="timelineItems"></app-tweet-timeline>
   </div>
   <app-suggested-users
     [myFollowings]="myFollowings"

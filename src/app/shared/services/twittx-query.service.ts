@@ -7,8 +7,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class TwittxQueryService {
   constructor(private _httpClient: HttpClient) {}
-  executeAsync(url: string, headers?: any): Observable<any> {
-    return this._httpClient.get(url, { headers: headers });
+  executeAsync(url: string, headers?: any, queryParams?: any): Observable<any> {
+    return this._httpClient.get(url, { headers: headers, params: queryParams });
   }
   postAsync(url: string, body: any): Observable<any> {
     return this._httpClient.post(url, body);

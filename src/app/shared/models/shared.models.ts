@@ -33,3 +33,7 @@ export type Environment = {
     searchByUsername: string;
   };
 };
+export type PageConfig = {
+  page: number,
+  size: number
+}
