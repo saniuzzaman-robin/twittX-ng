@@ -5,7 +5,7 @@ export const authGuard = () => {
   const cookieService = inject(CookieService);
   const router = inject(Router);
 
-  if (cookieService.getCookie(window.location.hostname)) {
+  if (cookieService.getCookie(window?.location.hostname)) {
     return true;
   }
   // Redirect to the login page

@@ -42,7 +42,7 @@ export class AuthService {
                 decodedToken?.exp
               );
               this._cookieService.setCookie(
-                window.location.hostname,
+                window?.location.hostname,
                 res?.token,
                 decodedToken?.exp
               );
@@ -82,7 +82,7 @@ export class AuthService {
     });
   }
   logout(): void {
-    this._cookieService.deleteCookie(window.location.hostname);
+    this._cookieService.deleteCookie(window?.location.hostname);
     this._router.navigate(['auth', 'login']);
   }
 }

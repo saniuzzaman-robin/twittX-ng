@@ -24,7 +24,7 @@ export class TwittxHttpInterceptorInterceptor implements HttpInterceptor {
     const clonedRequest = request.clone({
       setHeaders: {
         'X-Jwt-Token':
-          'Bearer ' + this._cookieService.getCookie(window.location.hostname),
+          'Bearer ' + this._cookieService.getCookie(window?.location.hostname),
       },
     });
     return next
