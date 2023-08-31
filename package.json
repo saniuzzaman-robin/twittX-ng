@@ -8,10 +8,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "dev:ssr": "ng run twittX-ng:serve-ssr",
-    "serve:ssr": "node dist/twittX-ng/server/main.js",
-    "build:ssr": "ng build && ng run twittX-ng:server",
-    "prerender": "ng run twittX-ng:prerender"
+    "dev:ssr": "ng run twitt-x-ng:serve-ssr",
+    "serve:ssr": "node dist/twitt-x-ng/server/main.js",
+    "build:ssr": "ng build && ng run twitt-x-ng:server",
+    "prerender": "ng run twitt-x-ng:prerender"
   },
   "private": true,
   "dependencies": {

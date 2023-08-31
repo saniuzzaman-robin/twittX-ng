@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "twittX-ng": {
+    "twitt-x-ng": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,10 +17,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/twittX-ng/browser",
+            "outputPath": "dist/twitt-x-ng/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": ["zone.js"],
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -93,10 +95,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "twittX-ng:build:production"
+              "browserTarget": "twitt-x-ng:build:production"
             },
             "development": {
-              "browserTarget": "twittX-ng:build:development"
+              "browserTarget": "twitt-x-ng:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -104,13 +106,16 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "twittX-ng:build"
+            "browserTarget": "twitt-x-ng:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing"],
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -128,13 +133,16 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         },
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/twittX-ng/server",
+            "outputPath": "dist/twitt-x-ng/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "inlineStyleLanguage": "scss"
@@ -182,12 +190,12 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "twittX-ng:build:development",
-              "serverTarget": "twittX-ng:server:development"
+              "browserTarget": "twitt-x-ng:build:development",
+              "serverTarget": "twitt-x-ng:server:development"
             },
             "production": {
-              "browserTarget": "twittX-ng:build:production",
-              "serverTarget": "twittX-ng:server:production"
+              "browserTarget": "twitt-x-ng:build:production",
+              "serverTarget": "twitt-x-ng:server:production"
             }
           },
           "defaultConfiguration": "development"
@@ -201,12 +209,12 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "twittX-ng:build:production",
-              "serverTarget": "twittX-ng:server:production"
+              "browserTarget": "twitt-x-ng:build:production",
+              "serverTarget": "twitt-x-ng:server:production"
             },
             "development": {
-              "browserTarget": "twittX-ng:build:development",
-              "serverTarget": "twittX-ng:server:development"
+              "browserTarget": "twitt-x-ng:build:development",
+              "serverTarget": "twitt-x-ng:server:development"
             }
           },
           "defaultConfiguration": "production"
@@ -215,6 +223,8 @@
     }
   },
   "cli": {
-    "schematicCollections": ["@angular-eslint/schematics"]
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
